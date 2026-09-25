@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DBA | جروب النسور</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Tahoma,Arial,sans-serif;background:#17150f;color:#fff}body{overflow-x:hidden}
+.intro{position:fixed;inset:0;background:#000;z-index:20;display:grid;place-items:center;transition:opacity 1.1s ease,visibility 1.1s}.intro.hide{opacity:0;visibility:hidden}.intro video{width:100%;height:100%;object-fit:cover}
+.start-screen{position:absolute;inset:0;z-index:3;display:grid;place-items:center;background:radial-gradient(circle at center,#2b2519 0,#0c0b08 48%,#000 100%);transition:opacity .65s ease,visibility .65s}.start-screen.hide{opacity:0;visibility:hidden;pointer-events:none}.start-box{text-align:center;padding:28px}.start-eagle{font-size:52px;margin-bottom:6px}.start-mark{font:700 clamp(58px,12vw,100px) Georgia,serif;letter-spacing:10px;color:#e7d4aa;text-shadow:0 3px 28px #d4b97966}.start-text{color:#d8c9aa;margin:8px 0 22px;font-size:16px}.start-btn{min-width:180px}.skip{position:absolute;left:22px;bottom:22px;border:1px solid #d9c79d66;background:#17150faa;color:#f4ead0;border-radius:999px;padding:10px 18px;cursor:pointer}
+.page{min-height:100vh;background:linear-gradient(#17150fb8,#17150fe8),url("final-frame.jpg") center/cover fixed;display:grid;place-items:center;padding:30px 16px}.card{width:min(720px,100%);background:#242018dc;border:1px solid #d9c79d55;box-shadow:0 24px 80px #0008;backdrop-filter:blur(12px);border-radius:28px;padding:34px;text-align:center}.mark{font:700 clamp(42px,8vw,74px) Georgia,serif;letter-spacing:8px;color:#e7d4aa;text-shadow:0 3px 22px #d4b97955}.eagle{font-size:38px;margin:4px}.card h1{font-size:clamp(26px,5vw,40px);margin:10px 0;color:#fff8e8}.lead{color:#dfd5c0;line-height:1.9;font-size:17px;margin:0 auto 24px;max-width:570px}
+.gold{background:linear-gradient(135deg,#c4a66b,#f1ddb0,#b18d50);color:#201b12;border:0;border-radius:14px;padding:15px 25px;font-weight:800;font-size:17px;cursor:pointer;box-shadow:0 9px 28px #0005;transition:.25s}.gold:hover{transform:translateY(-2px)}.gold:disabled{opacity:.65;cursor:not-allowed;transform:none}
+.form{display:none;text-align:right;margin-top:28px;padding-top:25px;border-top:1px solid #d9c79d33}.form.show{display:block;animation:up .55s ease}@keyframes up{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}label{display:block;margin:14px 2px 7px;color:#f1e6cf;font-weight:700}input{width:100%;padding:14px 15px;border-radius:12px;border:1px solid #bda87855;background:#100f0bd9;color:white;font-size:16px;outline:none}input:focus{border-color:#d8bd7e;box-shadow:0 0 0 3px #d8bd7e22}.submit{width:100%;margin-top:22px}.note{font-size:13px;color:#bfb39b;margin-top:12px;text-align:center}.success{display:none;padding:25px 10px}.success.show{display:block}.success b{font-size:26px;color:#f1ddb0}.success p{color:#dfd5c0;font-size:18px}.setup{margin-top:18px;color:#c7baa0;font-size:12px}
+@media(max-width:600px){.intro video{object-fit:contain}.card{padding:26px 18px;border-radius:22px}.page{padding:18px 12px}}
+</style>
+</head>
+<body>
+<section class="intro" id="intro">
+<video id="video" src="intro.mp4" playsinline preload="metadata"></video>
+<div class="start-screen" id="startScreen"><div class="start-box"><div class="start-eagle">🦅</div><div class="start-mark">DBA</div><p class="start-text">مرحبًا بك في جروب النسور</p><button class="gold start-btn" id="startBtn">ابدأ</button></div></div>
+<button class="skip" id="skip" style="display:none">تخطي المقدمة</button>
+</section>
+<main class="page"><section class="card">
+<div class="eagle">🦅</div><div class="mark">DBA</div><h1>أهلاً بك في جروب النسور</h1>
+<p class="lead">نتمنى لك التوفيق والنجاح في رحلتك معنا.<br>هنستأذنك تملأ البيانات المرفقة حتى نقدر نسجل بياناتك.</p>
+<button class="gold" id="openForm">اضغط هنا لتسجيل بياناتك</button>
+<form class="form" id="form">
+<label>الاسم رباعي</label><input name="fullName" required autocomplete="name" placeholder="اكتب الاسم رباعي">
+<label>رقم الكشف</label><input name="examNumber" required inputmode="numeric" placeholder="اكتب رقم الكشف">
+<label>الوظيفة</label><input name="job" required placeholder="اكتب الوظيفة">
+<label>المحافظة</label><input name="governorate" required placeholder="اكتب المحافظة">
+<label>رقم الهاتف</label><input name="phone" required type="tel" inputmode="tel" autocomplete="tel" placeholder="مثال: 01xxxxxxxxx">
+<button class="gold submit" type="submit" id="submitBtn">إرسال البيانات</button><p class="note" id="status"></p>
+</form>
+<div class="success" id="success"><b>تم تسجيل بياناتك بنجاح ✓</b><p>أهلاً بك بين النسور 🦅</p></div>
+<div class="setup">DBA • Eagles Group</div>
+</section></main>
+<script>
+const GOOGLE_SCRIPT_URL="https://script.google.com/macros/s/AKfycbxYzV0ugP_LO8JAVEhc8HsIdWbybESEQgaO78Yp_KGJET_9ULTkiGrLZ0kjuspbUpfshA/exec";
+const intro=document.getElementById("intro"),video=document.getElementById("video"),startScreen=document.getElementById("startScreen"),startBtn=document.getElementById("startBtn"),skip=document.getElementById("skip");
+document.body.style.overflow="hidden";
+function finishIntro(){intro.classList.add("hide");document.body.style.overflow="auto"}
+video.addEventListener("ended",finishIntro);skip.onclick=finishIntro;
+startBtn.onclick=async()=>{try{video.muted=false;video.volume=1;video.currentTime=0;await video.play();startScreen.classList.add("hide");skip.style.display="block"}catch(e){startBtn.textContent="اضغط مرة أخرى لتشغيل الفيديو بالصوت"}};
+const openForm=document.getElementById("openForm"),form=document.getElementById("form");
+openForm.onclick=()=>{openForm.style.display="none";form.classList.add("show")};
+const submitBtn=document.getElementById("submitBtn"),status=document.getElementById("status"),success=document.getElementById("success");let isSubmitting=false;
+form.addEventListener("submit",async event=>{event.preventDefault();if(isSubmitting)return;isSubmitting=true;submitBtn.disabled=true;submitBtn.textContent="جارٍ تسجيل البيانات...";status.textContent="برجاء الانتظار...";
+const fd=new FormData(form);const data={fullName:fd.get("fullName"),examNumber:fd.get("examNumber"),job:fd.get("job"),governorate:fd.get("governorate"),phone:fd.get("phone")};
+try{await fetch(GOOGLE_SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)});status.textContent="";form.classList.remove("show");form.style.display="none";success.classList.add("show")}
+catch(e){status.textContent="تعذر الاتصال. تحقق من الإنترنت وحاول مرة أخرى.";submitBtn.disabled=false;submitBtn.textContent="إرسال البيانات";isSubmitting=false}});
+</script>
+</body></html>
